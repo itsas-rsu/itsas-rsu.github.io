@@ -1,10 +1,10 @@
 import { ITSASElement, html, css } from './itsas-element.mjs'
 
-import '../../components/button/button.mjs';
-import '../../components/icon/icon.mjs';
-import '../../components/forms/login-form.mjs';
-import '../../components/forms/sign-up-form.mjs';
-import '../../components/forms/game-find-form.mjs';
+import '../components/button/button.mjs';
+import '../components/icon/icon.mjs';
+import '../components/forms/login-form.mjs';
+import '../components/forms/sign-up-form.mjs';
+import '../components/forms/game-find-form.mjs';
 
 import './itsas-system-header.mjs';
 
