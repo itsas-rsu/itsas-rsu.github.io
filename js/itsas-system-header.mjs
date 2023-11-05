@@ -36,23 +36,17 @@ class ITSASSystemHeader extends ITSASElement {
                 border-bottom: 1px solid var(--turing-gray-70, #484852);
                 background: var(--turing-gray-80, #31323A);
                 box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+                margin-left: 80px;
             }
             
-            .logo {
+            .itsas-name {
                 display: flex;
                 align-items: center;
             }
 
-            .logo img {
-                padding-right: 1rem;
-                width: auto; /* Ширина логотипа будет определяться автоматически */
-                height: 80px;
-                max-height: 100%; /* Убеждаемся, что логотип не выходит за пределы своего контейнера */
-            }
-
-            .logo a {
+            .itsas-name a {
                 font-weight: 700;
-                color: white; /* белый текст для логотипа */
+                color: white; /* белый текст для текста */
                 text-decoration: none;
             }
 
@@ -63,7 +57,7 @@ class ITSASSystemHeader extends ITSASElement {
                 font-size: 30px;
                 font-style: normal;
                 font-weight: 700;
-                line-height: 38px; /* 126.667% */
+                line-height: 38px;
                 letter-spacing: 3px;
                 text-transform: uppercase;
             }
@@ -97,10 +91,10 @@ class ITSASSystemHeader extends ITSASElement {
             }            
             
             .user-name {
-                font-family: Roboto Condensed;
+                font-family: Tahoma, sans-serif;
                 font-size: 20px;
                 font-style: normal;
-                font-weight: 600;
+                font-weight: 300;
                 line-height: normal;
                 letter-spacing: -0.4px;
                 color: white; /* Цвет текста для контраста на черном фоне */
@@ -113,7 +107,7 @@ class ITSASSystemHeader extends ITSASElement {
                 margin-right: 10px; /* Расстояние между иконками и информацией о пользователе */
             }
             
-            .icon-button {
+            .header-button {
                 background: none;
                 border: none;
                 cursor: pointer;
@@ -124,8 +118,8 @@ class ITSASSystemHeader extends ITSASElement {
                 transition: color 0.3s ease; /* Плавный переход для изменения цвета */
             }
             
-            .icon-button:hover,
-            .icon-button:focus {
+            .header-button:hover,
+            .header-button:focus {
                 color: #BBB; /* цвет иконки при наведении, можно настроить */
             }     
             
@@ -172,15 +166,14 @@ class ITSASSystemHeader extends ITSASElement {
     render() {
         return html`
             <header>
-                <div class="logo">
-                    <img src="./images/logo.png" alt="ITSAS Logo" height="60" />
+                <div class="itsas-name">
                     <a href="#">
                         <h3>ITSAS</h3>
                     </a>
                 </div>
                 <div class="user-actions">
-                    <itsas-icon name="camera" class="icon-button settings-icon"></itsas-icon>
-                    <itsas-icon name="bell" class="icon-button notifications-icon"></itsas-icon>
+                    <itsas-icon name="camera" class="header-button settings-icon"></itsas-icon>
+                    <itsas-icon name="bell" class="header-button notifications-icon"></itsas-icon>
                 </div>
                 <div class="user-menu">
                     <img src="./images/avatar.png" alt="Аватар пользователя" class="user-avatar">
@@ -188,11 +181,11 @@ class ITSASSystemHeader extends ITSASElement {
                         <div class="user-name">Даниил Зацепин</div>  
                         <div class="user-status">Pro Member</div>  
                     </div>
-                    <button class="icon-button" aria-label="Открыть меню пользователя">
+                    <button class="header-button" aria-label="Открыть меню пользователя">
                         <itsas-icon name="arrow-menu"></itsas-icon>
                     </button>  
                 </div>
-            </header>
+            </header>     
         `;
     }
 
