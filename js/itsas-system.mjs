@@ -8,6 +8,7 @@ import '../components/forms/game-find-form.mjs';
 
 import './itsas-system-header.mjs';
 import './itsas-system-sidebar.mjs';
+import './itsas-system-main.mjs';
 
 import { itsasSystemStyles } from './itsas-system-css.mjs';
 

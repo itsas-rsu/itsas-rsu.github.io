@@ -168,7 +168,7 @@ class ITSASSystemHeader extends ITSASElement {
             <header>
                 <div class="itsas-name">
                     <a href="#">
-                        <h3>ITSAS</h3>
+                        <h3>ИСАВР</h3>
                     </a>
                 </div>
                 <div class="user-actions">

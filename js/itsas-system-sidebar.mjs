@@ -93,7 +93,7 @@ class ITSASSystemSidebar extends ITSASElement {
                 <div class="sidebar-section">
                     <img src="./images/logo.png" alt="ITSAS Logo" height="60" />
                 </div>
-            
+        
                 <!-- Секция основных кнопок -->
                 <div class="sidebar-section menu-section">
                     <button class="sidebar-button">
@@ -103,6 +103,7 @@ class ITSASSystemSidebar extends ITSASElement {
                         <itsas-icon name="credit-card"></itsas-icon>
                     </button>  
                 </div>
+                
                 <!-- Секция выхода, всегда внизу -->
                 <div class="sidebar-section">
                     <button class="sidebar-button">
