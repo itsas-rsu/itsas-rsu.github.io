@@ -17,7 +17,7 @@ class ITSASSystemMain extends ITSASElement {
                     -ms-user-select: none;
                     user-select: none;
                 }
-                
+
                 main {
                     display: flex; /* Использование flexbox для управления содержимым */
                     margin-left: 80px; /* Отступ слева, равный ширине sidebar */
@@ -37,7 +37,7 @@ class ITSASSystemMain extends ITSASElement {
 
                 /* Специфические стили для графика, если это необходимо */
                 .chart-container {
-                    width: auto; 
+                    width: auto;
                     height: auto;
                 }
 
@@ -49,44 +49,60 @@ class ITSASSystemMain extends ITSASElement {
         ];
     }
 
+    static get properties() {
+        return {
+            show: { type: Boolean, default: false }
+        }
+    }
+
     render() {
         return html`
             <main>
                 <div class="block">
                     <div id="chart-container">
                         <canvas id="myChart"></canvas>
-                    </div>            
+                    </div>
                 </div>
                 <div class="block">
                     <div id="diagram-container">
                         <canvas id="myDiagram"></canvas>
-                    </div>            
+                    </div>
                 </div>
             </main>
         `;
     }
 
-    firstUpdated() {
-        super.firstUpdated();
+    handleResponse(response) {
+        return response.ok ? response.json().then((data) => data)
+        : Promise.reject(new Error('Unexpected response'));
+    }
 
+    drawChart(arr) {
+        console.log(arr.data)
         const ctx = this.shadowRoot.getElementById('myChart').getContext('2d');
-    
+
         // Генерация данных для параболы y = x^2
         const data = {
             labels: [],
             datasets: [{
-                label: 'Парабола y = x^2',
                 backgroundColor: 'rgb(255, 99, 132)',
+                backgroundColor: 'rgb(255, 99, 132)',
+                label: 'Парабола y = x^2',
+                label: 'Парабола y = x^2',
                 borderColor: 'rgb(255, 99, 132)',
                 data: [],
             }]
         };
-    
-        for (let x = -2; x <= 2; x += 0.1) {
-            data.labels.push(x.toFixed(1));
-            data.datasets[0].data.push(x * x);
-        }
-    
+
+        arr.data.forEach(element => {
+            data.labels.push(element.date);
+            data.datasets[0].data.push(element.OT);
+        });
+        // for (let x = -2; x <= 2; x += 0.1) {
+        //     data.labels.push(x.toFixed(1));
+        //     data.datasets[0].data.push(x * x);
+        // }
+
         // Создание графика
         const myChart = new Chart(ctx, {
             type: 'line',
@@ -94,24 +110,37 @@ class ITSASSystemMain extends ITSASElement {
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                scales: {
-                    x: {
-                        type: 'linear',
-                        position: 'bottom',
-                        min: -2,
-                        max: 2
-                    },
-                    y: {
-                        min: 0,
-                        max: 4
-                    }
-                }
+                // scales: {
+                //     x: {
+                //         type: 'linear',
+                //         position: 'bottom',
+                //         min: -2,
+                //         max: 2
+                //     },
+                //     y: {
+                //         min: 0,
+                //         max: 4
+                //     }
+                // }
             }
         });
+        this.show = true;
+    }
+
+    getDate() {
+        fetch('http://localhost:7000/api/start', { method: 'GET' })
+              .then(this.handleResponse).then(this.drawChart.bind(this));
+    }
+
+    firstUpdated() {
+        super.firstUpdated();
+
+        this.getDate()
+
 
         // Инициализация второго графика (диаграммы)
         const ctx2 = this.shadowRoot.getElementById('myDiagram').getContext('2d');
-        
+
         // Здесь вы определите данные и параметры для вашей диаграммы
         const diagramData = {
             labels: [

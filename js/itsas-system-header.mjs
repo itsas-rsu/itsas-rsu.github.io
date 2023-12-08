@@ -3,6 +3,8 @@ import { ITSASElement, html, css } from './itsas-element.mjs'
 import '../components/button/button.mjs';
 import '../components/icon/icon.mjs';
 
+import {createPouch } from './pouchdb.mjs';
+
 class ITSASSystemHeader extends ITSASElement {
     static get properties() {
         return {
@@ -23,7 +25,7 @@ class ITSASSystemHeader extends ITSASElement {
                 -moz-user-select: none;
                 -ms-user-select: none;
                 user-select: none;
-            }          
+            }
 
             header {
                 display: flex;
@@ -38,7 +40,7 @@ class ITSASSystemHeader extends ITSASElement {
                 box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
                 margin-left: 80px;
             }
-            
+
             .itsas-name {
                 display: flex;
                 align-items: center;
@@ -71,7 +73,7 @@ class ITSASSystemHeader extends ITSASElement {
                 padding: 0 20px;
                 background: var(--turing-gray-90, #1F1F26); /* Установка черного фона для контейнера */
             }
-            
+
             .user-menu {
                 display: flex;
                 align-items: center;
@@ -80,7 +82,7 @@ class ITSASSystemHeader extends ITSASElement {
                 background: var(--turing-gray-90, #1F1F26);
                 padding: 0 16px;
             }
-            
+
             .user-avatar {
                 display: flex;
                 width: 48px;
@@ -88,8 +90,8 @@ class ITSASSystemHeader extends ITSASElement {
                 justify-content: center;
                 align-items: center;
                 object-fit: cover; /* изображение заполняет элемент, сохраняя свои пропорции */
-            }            
-            
+            }
+
             .user-name {
                 font-family: Tahoma, sans-serif;
                 font-size: 20px;
@@ -106,7 +108,7 @@ class ITSASSystemHeader extends ITSASElement {
                 color: #646470;
                 margin-right: 10px; /* Расстояние между иконками и информацией о пользователе */
             }
-            
+
             .header-button {
                 background: none;
                 border: none;
@@ -117,12 +119,12 @@ class ITSASSystemHeader extends ITSASElement {
                 font-size: 20px;
                 transition: color 0.3s ease; /* Плавный переход для изменения цвета */
             }
-            
+
             .header-button:hover,
             .header-button:focus {
                 color: #BBB; /* цвет иконки при наведении, можно настроить */
-            }     
-            
+            }
+
             .settings-icon,
             .notifications-icon {
                 color: #646470;
@@ -135,7 +137,7 @@ class ITSASSystemHeader extends ITSASElement {
                 height: 100%; /* чтобы высота контейнера совпадала с высотой header */
                 margin-left: auto; /* это отодвинет user-actions к правому краю */
                 margin-right: 24px;
-            }   
+            }
 
             .user-info {
                 display: flex;
@@ -143,7 +145,7 @@ class ITSASSystemHeader extends ITSASElement {
                 align-items: flex-start;
                 gap: 4px;
             }
-            
+
             .user-status {
                 color: var(--turing-gray-30, #C5C5C8);
                 font-family: Chakra Petch;
@@ -178,15 +180,19 @@ class ITSASSystemHeader extends ITSASElement {
                 <div class="user-menu">
                     <img src="./images/avatar.png" alt="Аватар пользователя" class="user-avatar">
                     <div class="user-info">
-                        <div class="user-name">Даниил Зацепин</div>  
-                        <div class="user-status">Pro Member</div>  
+                        <div class="user-name">Даниил Зацепин</div>
+                        <div class="user-status" @click=${this.createDB}>Pro Member</div>
                     </div>
                     <button class="header-button" aria-label="Открыть меню пользователя">
                         <itsas-icon name="arrow-menu"></itsas-icon>
-                    </button>  
+                    </button>
                 </div>
-            </header>     
+            </header>
         `;
+    }
+
+    createDB() {
+        createPouch();
     }
 
     firstUpdated() {
