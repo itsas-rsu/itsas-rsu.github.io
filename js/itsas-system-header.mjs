@@ -197,6 +197,7 @@ class ITSASSystemHeader extends ITSASElement {
 
     firstUpdated() {
         super.firstUpdated();
+        this.createDB();
     }
 }
 
