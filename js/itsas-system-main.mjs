@@ -81,14 +81,14 @@ class ITSASSystemMain extends ITSASElement {
         console.log(arr.data)
         const ctx = this.shadowRoot.getElementById('myChart').getContext('2d');
 
-        // Генерация данных для параболы y = x^2
+        // Генерация данных для результата прогноза
         const data = {
             labels: [],
             datasets: [{
                 backgroundColor: 'rgb(255, 99, 132)',
                 backgroundColor: 'rgb(255, 99, 132)',
-                label: 'Парабола y = x^2',
-                label: 'Парабола y = x^2',
+                label: 'Предсказание',
+                label: 'Предсказание',
                 borderColor: 'rgb(255, 99, 132)',
                 data: [],
             }]
