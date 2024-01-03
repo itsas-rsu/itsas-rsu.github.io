@@ -80,14 +80,14 @@ class ITSASSystemMain extends ITSASElement {
     drawChart(arr) {
         const ctx = this.renderRoot?.querySelector('#myChart');
 
-        // Генерация данных для графика
+        // Генерация данных для результата прогноза
         const data = {
             labels: [],
             datasets: [{
                 backgroundColor: 'rgb(255, 99, 132)',
                 backgroundColor: 'rgb(255, 99, 132)',
-                label: 'Данные',
-                label: 'Данные',
+                label: 'Предсказание',
+                label: 'Предсказание',
                 borderColor: 'rgb(255, 99, 132)',
                 data: [],
             }]
