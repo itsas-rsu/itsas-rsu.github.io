@@ -2,13 +2,14 @@ import { RrlElement, html, css } from '../../js/rrl-element.mjs';
 
 import '../icon/icon.mjs'
 
-customElements.define('rrl-button', class RrlButton extends RrlElement {
+class ToggleButton extends RrlElement {
     static get properties() {
         return {
             _useInfo: { type: Boolean, default: true },
             label: { type: String, default: '' },
             textAlign: { type: String, default: 'center' },
             name: { type: String, default: '', isIcon: true },
+            toggledName: { type: String, default: '', isIcon: true },
             fill: { type: String, default: '' },
             color: { type: String, default: 'gray' },
             borderColor: { type: String, default: '' },
@@ -45,12 +46,13 @@ customElements.define('rrl-button', class RrlButton extends RrlElement {
             .rrl-btn {
                 display: flex;
                 align-items: center;
-                padding: 0 5px;
                 cursor: pointer;
             }
             .rrl-btn:hover {
                 transition: .3s;
                 filter: brightness(85%);
+                background-color: var(--nav-item-hover-background-color);
+                color: var(--nav-item-hover-color);
             }
             .rrl-btn:active {
                 transition: .1s;
@@ -108,15 +110,15 @@ customElements.define('rrl-button', class RrlButton extends RrlElement {
         this.fill = this.fill || this.color;
         this.size = this.size || this.height || this.width;
         if (this.icon) _icon = JSON.stringify(this.icon);
-        return html`<rrl-icon class="${this.toggled ? this.toggledClass : this.notoggledClass}" icon=${_icon} name="${this.name}" fill="${this.fill}" size="${this.size}" scale="${this.scale}"
+        return html`<rrl-icon class="${this.toggled ? this.toggledClass : this.notoggledClass}" icon=${_icon} name="${this.toggled ? this.toggledName : this.name}" fill="${this.fill}" size="${this.size}" scale="${this.scale}"
             rotate="${this.rotate}" speed="${this.speed}" blink="${this.blink}" blval="${this.blval}" path="${this.path}"></rrl-icon>`;
     }
     render() {
         return html`
             <div id="rrl-btn" class="rrl-btn"  tabindex="0" style="
                     text-align: ${this.textAlign};
-                    width: ${this.width || this.size};
-                    height: ${this.height || this.size};
+                    width: ${this.width || this.size}px;
+                    height: ${this.height || this.size}px;
                     border: ${this.border} solid ${this.borderColor || this.color || this.fill};
                     border-radius: ${this.radius};
                     background-color: ${this.back};
@@ -131,4 +133,6 @@ customElements.define('rrl-button', class RrlButton extends RrlElement {
             </div>
         `;
     }
-});
+};
+
+customElements.define('toggle-button', ToggleButton);

@@ -69,8 +69,8 @@ export const formStyles = css`
 
 /* Modal Form Box */
 .form {
-    width: 60%; /* Could be more or less, depending on screen size */
-    max-width: 450px;
+    width: 80%; /* Could be more or less, depending on screen size */
+    max-width: 800px;
     margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
     border: 1px solid var(--form-border-color);
     border-radius: 10px;
@@ -125,11 +125,9 @@ input[type="number"] {
     margin: 8px 0;
     padding: 12px 20px;
     border: 1px solid #ccc;
-    border-radius: 10px;
     box-sizing: border-box;
     outline-color: var(--form-outline-color);
     color: var(--form-color);
-    font-size: 14px;
 }
 
 #form.dark input[type="text"],
@@ -182,7 +180,6 @@ button {
     margin: 8px 0;
     padding: 14px 20px;
     border: none;
-    border-radius: 15px;
     overflow: hidden;
     background-color: var(--background-green);
     color: white;
@@ -323,7 +320,6 @@ button:hover {
 .checkbox-remember label {
     overflow: hidden;
     text-overflow: ellipsis;
-    font-weight: bold;
     white-space: nowrap;
 }
 
@@ -392,32 +388,22 @@ span.psw {
 .form-tab {
     position: relative;
     display: flex;
-    width: 85px;
-    justify-content: center;
+    vertical-align: top;
     bottom: auto;
     margin-top: 3px;
+    padding-bottom: 0;
     overflow: hidden;
     line-height: 36px;
     font-weight: normal;
     color: var(--tab-color);
     border: solid var(--form-header-border-color);
-    border-width: 1px 1px 0px;
+    border-width: 1px 1px 1px;
     border-radius: 5px 5px 0 0;
     background: var(--form-background-color);
 }
 
 #form.dark .form-tab {
     background: var(--dark-header-color);
-}
-
-.forgot-password{
-    text-decoration: none;
-    color: #444;
-}
-
-.forgot-password:hover {
-    font-weight: bold;
-    color: var(--link-hover-color);
 }
 
 
@@ -466,7 +452,6 @@ span.psw {
     text-align: center;
     text-decoration: none;
     border-radius: 4px 4px 0 0;
-    border-bottom: none;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -527,26 +512,22 @@ span.psw {
     cursor: pointer;
 }
 
-// .sign-up-link:active {
-//     color: -webkit-activelink;
-// }
-
-.sign-up-link:hover {
-    font-weight: bold;
-    color: var(--link-hover-color);
+.sign-up-link:active {
+    color: -webkit-activelink;
 }
+
 
 #google {
     display: flex;
     justify-content: center;
-    margin: 8px 0;
+    margin-top: 8px;
 }
 
 .close-button:hover,
 .close-button:focus,
 #form.dark .close-button:hover,
 #form.dark .close-button:focus {
-    color: var(--link-hover-color);
+    color: red;
     cursor: pointer;
 }
 

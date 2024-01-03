@@ -78,17 +78,16 @@ class ITSASSystemMain extends ITSASElement {
     }
 
     drawChart(arr) {
-        console.log(arr.data)
-        const ctx = this.shadowRoot.getElementById('myChart').getContext('2d');
+        const ctx = this.renderRoot?.querySelector('#myChart');
 
-        // Генерация данных для параболы y = x^2
+        // Генерация данных для графика
         const data = {
             labels: [],
             datasets: [{
                 backgroundColor: 'rgb(255, 99, 132)',
                 backgroundColor: 'rgb(255, 99, 132)',
-                label: 'Парабола y = x^2',
-                label: 'Парабола y = x^2',
+                label: 'Данные',
+                label: 'Данные',
                 borderColor: 'rgb(255, 99, 132)',
                 data: [],
             }]
@@ -98,10 +97,7 @@ class ITSASSystemMain extends ITSASElement {
             data.labels.push(element.date);
             data.datasets[0].data.push(element.OT);
         });
-        // for (let x = -2; x <= 2; x += 0.1) {
-        //     data.labels.push(x.toFixed(1));
-        //     data.datasets[0].data.push(x * x);
-        // }
+
 
         // Создание графика
         const myChart = new Chart(ctx, {
@@ -110,25 +106,13 @@ class ITSASSystemMain extends ITSASElement {
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                // scales: {
-                //     x: {
-                //         type: 'linear',
-                //         position: 'bottom',
-                //         min: -2,
-                //         max: 2
-                //     },
-                //     y: {
-                //         min: 0,
-                //         max: 4
-                //     }
-                // }
             }
         });
         this.show = true;
     }
 
     getDate() {
-        fetch('http://localhost:7000/api/start', { method: 'GET' })
+        fetch('http://localhost:7000/api/start?n=31', { method: 'GET' })
               .then(this.handleResponse).then(this.drawChart.bind(this));
     }
 

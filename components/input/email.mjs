@@ -5,7 +5,7 @@ import '../button/button.mjs'
 
 import styles from './input-css.mjs'
 
-class RrlInput extends RrlElement {
+class RrlEMail extends RrlElement {
     static get properties() {
         return {
             type: { type: String, default: 'text'},
@@ -38,7 +38,6 @@ class RrlInput extends RrlElement {
             icon: { type: Object, default: undefined },
             buttonName: { type: String, default: '' },
             placeholder: { type: String, default: '' },
-            value: { type: String, default: '' },
         }
     }
 
@@ -83,14 +82,7 @@ class RrlInput extends RrlElement {
     }
 
     get value() {
-        return this.renderRoot?.querySelector('#input')?.value ?? null;
-    }
-
-    set value(value) {
-        const input = this.renderRoot?.querySelector('#input');
-        if (input) {
-            input.value= value;
-        }
+        return this.renderRoot?.querySelector('#input1')?.value ?? null;
     }
 
     get #button() {
@@ -108,14 +100,24 @@ class RrlInput extends RrlElement {
                     placeholder=${this.placeholder || nothing}
                     ${this.required ? 'required' : ''}
                     class=""
-                    .value=${this.value || nothing} @change=${this.updateLoginValue}
+                    .value=${this.login || nothing} @change=${this.updateLoginValue}
                 >
                 ${this.name ? this.#icon : ''}
                 ${this.buttonName ? this.#button : ''}
             </div>
         `;
-        ///.value=${this.value || nothing}
+    }
+
+    get value() {
+        return this.renderRoot?.querySelector('#input')?.value ?? null;
+    }
+
+    set value(value) {
+        const input = this.renderRoot?.querySelector('#input');
+        if (input) {
+            input.value= value;
+        }
     }
 };
 
-customElements.define("rrl-input", RrlInput);
+customElements.define("rrl-email", RrlEMail);

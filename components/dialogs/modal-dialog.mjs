@@ -1,9 +1,9 @@
-
-import { ITSASElement, html, css } from '../../js/itsas-element.mjs';
+import { RrlElement, html, css } from '../../js/rrl-element.mjs';
 
 import { formStyles } from './modal-dialog-css.mjs'
+import '../button/close-button.mjs';
 
-class ModalDialog extends ITSASElement {
+class ModalDialog extends RrlElement {
     static get properties() {
         return {
             version: { type: String, default: '1.0.0', save: true, category: 'settings' },
@@ -19,6 +19,7 @@ class ModalDialog extends ITSASElement {
             css`
                 :host {
                     user-select: none;
+                    color: var(--form-color);
                 }
             `
         ]
@@ -35,7 +36,7 @@ class ModalDialog extends ITSASElement {
                 <div class="modal-dialog-content animate" id="modal-dialog">
                     <div class="dialog-header">
                         <span id="dialog-title" class="dialog-title no-select">Сообщение</span>
-                        <span id="dialog-button-close" class="dialog-button-close no-select" title="Закрыть" @click=${()=>this.close()}>&times;</span>
+                        <close-button class="close-button no-select" name="times" @click=${()=>this.close('CANCEL')}></close-button>
                     </div>
 
                     <div class="dialog-body">

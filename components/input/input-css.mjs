@@ -21,15 +21,18 @@ const styles = css`
 
 input[type="text"],
 input[type="password"],
+input[type="mail"],
 input[type="number"] {
     display: inline-block;
     width: 100%;
     margin: 8px 0px;
     padding: 12px 20px 12px 40px;
     border: 1px solid rgb(204, 204, 204);
+    border-radius: 10px;
     box-sizing: border-box;
     outline-color: var(--form-outline-color);
     color: var(--form-color);
+    font-size: 14px;
 }
 
 [placeholder] {
@@ -39,12 +42,13 @@ input[type="number"] {
 .icon {
     display: inline-block;
     position: absolute;
-    left: 5px
+    left: 8px
 }
 
 .button {
     display: inline-block;
     position: absolute;
+    cursor: pointer;
     right: 5px
 }
 

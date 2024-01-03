@@ -1,8 +1,8 @@
-import { ITSASElement, css, svg } from '../../js/itsas-element.mjs';
+import { RrlElement, css, svg } from '../../js/rrl-element.mjs';
 
 import icons from './icons/icons.mjs';
 
-customElements.define('itsas-icon', class ITSASIcon extends ITSASElement {
+customElements.define('rrl-icon', class RrlIcon extends RrlElement {
 
     static get properties() {
         return {
@@ -36,8 +36,10 @@ customElements.define('itsas-icon', class ITSASIcon extends ITSASElement {
         let s = 24;
         if (!this.path && name && icons[name]) {
             this.path = icons[name].path;
+            this.text = icons[name].text;
             s = icons[name].size || 24;
             this.viewbox = icons[name]['viewbox'] || `0 0 ${s} ${s}`;
+            this.defs = icons[name]['defs'] || '';
         }
         this._s2 = s / 2;
         this._isFirstUpdated = true;
@@ -69,7 +71,24 @@ customElements.define('itsas-icon', class ITSASIcon extends ITSASElement {
         `;
     }
 
+    createHTMLNode(html) {
+        var t = document.createElement('template');
+        t.innerHTML = html;
+        return t.content;
+    }
+
     render() {
+        if (this.text) {
+            return svg`
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                preserveAspectRatio="xMidYMid meet" xml:space="preserve"
+                viewBox="${this.viewbox}"
+                width="${this.width || this.size}"
+                height="${this.height || this.size}">
+                ${this.createHTMLNode(this.text)}
+            </svg>        `
+        }
+        else
         return svg`
             <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                 preserveAspectRatio="xMidYMid meet" xml:space="preserve"
@@ -107,6 +126,10 @@ customElements.define('itsas-icon', class ITSASIcon extends ITSASElement {
                         }
                     </path>
                 />
+
+                               <defs>
+                  ${this.createHTMLNode(this.defs)}
+                </defs>
             </svg>
         `
     }

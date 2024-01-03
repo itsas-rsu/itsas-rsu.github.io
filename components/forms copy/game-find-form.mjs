@@ -102,7 +102,7 @@ class GameFindForm extends RrlElement {
 
     async modalDialogShow() {
         const dialog =  this.renderRoot.querySelector('modal-dialog');
-        let modalResult = await dialog.show("Подключение прошло удачно");
+        let modalResult = await dialog.show("Подключение прошло успешно");
         if (modalResult === "Ok") {
             this.close();
         }
