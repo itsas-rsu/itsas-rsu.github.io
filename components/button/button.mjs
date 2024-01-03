@@ -1,8 +1,8 @@
-import { RrlElement, html, css } from '../../js/rrl-element.mjs';
+import { ITSASElement, html, css } from '../../js/itsas-element.mjs';
 
 import '../icon/icon.mjs'
 
-customElements.define('rrl-button', class RrlButton extends RrlElement {
+customElements.define('itsas-button', class ITSASButton extends ITSASElement {
     static get properties() {
         return {
             _useInfo: { type: Boolean, default: true },
@@ -42,21 +42,21 @@ customElements.define('rrl-button', class RrlButton extends RrlElement {
                 margin: 1px;
                 user-select: none;
             }
-            .rrl-btn {
+            .itsas-btn {
                 display: flex;
                 align-items: center;
                 padding: 0 5px;
                 cursor: pointer;
             }
-            .rrl-btn:hover {
+            .itsas-btn:hover {
                 transition: .3s;
                 filter: brightness(85%);
             }
-            .rrl-btn:active {
+            .itsas-btn:active {
                 transition: .1s;
                 filter: brightness(70%);
             }
-            .rrl-btn:focus {
+            .itsas-btn:focus {
                 outline:none;
             }
             .left90 {
@@ -108,12 +108,12 @@ customElements.define('rrl-button', class RrlButton extends RrlElement {
         this.fill = this.fill || this.color;
         this.size = this.size || this.height || this.width;
         if (this.icon) _icon = JSON.stringify(this.icon);
-        return html`<rrl-icon class="${this.toggled ? this.toggledClass : this.notoggledClass}" icon=${_icon} name="${this.name}" fill="${this.fill}" size="${this.size}" scale="${this.scale}"
-            rotate="${this.rotate}" speed="${this.speed}" blink="${this.blink}" blval="${this.blval}" path="${this.path}"></rrl-icon>`;
+        return html`<itsas-icon class="${this.toggled ? this.toggledClass : this.notoggledClass}" icon=${_icon} name="${this.name}" fill="${this.fill}" size="${this.size}" scale="${this.scale}"
+            rotate="${this.rotate}" speed="${this.speed}" blink="${this.blink}" blval="${this.blval}" path="${this.path}"></itsas-icon>`;
     }
     render() {
         return html`
-            <div id="rrl-btn" class="rrl-btn"  tabindex="0" style="
+            <div id="itsas-btn" class="itsas-btn"  tabindex="0" style="
                     text-align: ${this.textAlign};
                     width: ${this.width || this.size};
                     height: ${this.height || this.size};

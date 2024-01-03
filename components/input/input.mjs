@@ -1,11 +1,11 @@
-import { RrlElement, html, css, nothing } from '../../js/rrl-element.mjs';
+import { ITSASElement, html, css, nothing } from '../../js/itsas-element.mjs';
 
 import '../icon/icon.mjs'
 import '../button/button.mjs'
 
 import styles from './input-css.mjs'
 
-class RrlInput extends RrlElement {
+class ITSASInput extends ITSASElement {
     static get properties() {
         return {
             type: { type: String, default: 'text'},
@@ -78,7 +78,7 @@ class RrlInput extends RrlElement {
 
     get #icon() {
         return html`
-            <rrl-icon class="icon" icon="{}" name="${this.name}" fill="${this.fill}" size="${this.size}" scale="1" rotate="0" speed="0" blink="0" blval="1;0;0;1" path=""></rrl-icon>
+            <itsas-icon class="icon" icon="{}" name="${this.name}" fill="${this.fill}" size="${this.size}" scale="1" rotate="0" speed="0" blink="0" blval="1;0;0;1" path=""></itsas-icon>
         `
     }
 
@@ -95,7 +95,7 @@ class RrlInput extends RrlElement {
 
     get #button() {
         return html`
-            <rrl-icon class="button" icon="{}" name=${this.buttonName || nothing} fill="${this.fill}" size="${this.size}" scale="1" rotate="0" speed="0" blink="0" blval="1;0;0;1" path="" @click=${this.updateLoginValue}></rrl-icon>
+            <itsas-icon class="button" icon="{}" name=${this.buttonName || nothing} fill="${this.fill}" size="${this.size}" scale="1" rotate="0" speed="0" blink="0" blval="1;0;0;1" path="" @click=${this.updateLoginValue}></itsas-icon>
         `
     }
 
@@ -118,4 +118,4 @@ class RrlInput extends RrlElement {
     }
 };
 
-customElements.define("rrl-input", RrlInput);
+customElements.define("itsas-input", ITSASInput);

@@ -1,5 +1,5 @@
 
-import { RrlElement, html, css } from '../../js/rrl-element.mjs';
+import { ITSASElement, html, css } from '../../js/itsas-element.mjs';
 
 import { formStyles } from './form-css.mjs'
 
@@ -7,7 +7,7 @@ import { formStyles } from './form-css.mjs'
 
 import '../dialogs/modal-dialog.mjs';
 
-class GameFindForm extends RrlElement {
+class GameFindForm extends ITSASElement {
     static get properties() {
         return {
             version: { type: String, default: '1.0.0', save: true, category: 'settings' },

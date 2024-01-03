@@ -1,11 +1,11 @@
-import { RrlElement, html, css, nothing } from '../../js/rrl-element.mjs';
+import { ITSASElement, html, css, nothing } from '../../js/itsas-element.mjs';
 
 import '../icon/icon.mjs'
 import '../button/button.mjs'
 
 import styles from './input-css.mjs'
 
-class RrlPassword extends RrlElement {
+class ITSASPassword extends ITSASElement {
     static get properties() {
         return {
             type: { type: String, default: 'text'},
@@ -74,8 +74,8 @@ class RrlPassword extends RrlElement {
         this.fill = this.fill || this.color;
         this.size = this.size || this.height || this.width;
         if (this.icon) _icon = JSON.stringify(this.icon);
-        return html`<rrl-icon class="${this.toggled ? this.toggledClass : this.notoggledClass}" icon=${_icon} name="${this.name}" fill="${this.fill}" size="${this.size}" scale="${this.scale}"
-            rotate="${this.rotate}" speed="${this.speed}" blink="${this.blink}" blval="${this.blval}" path="${this.path}"></rrl-icon>`;
+        return html`<itsas-icon class="${this.toggled ? this.toggledClass : this.notoggledClass}" icon=${_icon} name="${this.name}" fill="${this.fill}" size="${this.size}" scale="${this.scale}"
+            rotate="${this.rotate}" speed="${this.speed}" blink="${this.blink}" blval="${this.blval}" path="${this.path}"></itsas-icon>`;
     }
 
     get #label() {
@@ -86,7 +86,7 @@ class RrlPassword extends RrlElement {
 
     get #icon() {
         return html`
-            <rrl-icon class="icon" icon="{}" name="${this.name}" fill="${this.fill}" size="${this.size}" scale="1" rotate="0" speed="0" blink="0" blval="1;0;0;1" path=""></rrl-icon>
+            <itsas-icon class="icon" icon="{}" name="${this.name}" fill="${this.fill}" size="${this.size}" scale="1" rotate="0" speed="0" blink="0" blval="1;0;0;1" path=""></itsas-icon>
         `
     }
 
@@ -96,12 +96,12 @@ class RrlPassword extends RrlElement {
 
     get #button() {
         return html`
-            <rrl-icon class="button" icon="{}" name=${this.type==="password" ? this.visibleIcon : this.invisibleIcon} fill="${this.fill}" size="${this.size}" scale="1" rotate="0" speed="0" blink="0" blval="1;0;0;1" path="" @mouseenter=${this.updateTypeValue} @mouseleave=${this.updateTypeValue} ></rrl-icon>
+            <itsas-icon class="button" icon="{}" name=${this.type==="password" ? this.visibleIcon : this.invisibleIcon} fill="${this.fill}" size="${this.size}" scale="1" rotate="0" speed="0" blink="0" blval="1;0;0;1" path="" @mouseenter=${this.updateTypeValue} @mouseleave=${this.updateTypeValue} ></itsas-icon>
         `
     }
     get #button1() {
         return html`
-            <rrl-button class="button" icon="{}" name="remove-red-eye" fill="gray" size="30" scale="0.9" rotate="0" speed="0" blink="0" blval="1;0;0;1" path=""></rrl-button>
+            <itsas-button class="button" icon="{}" name="remove-red-eye" fill="gray" size="30" scale="0.9" rotate="0" speed="0" blink="0" blval="1;0;0;1" path=""></itsas-button>
         `
     }
 
@@ -134,4 +134,4 @@ class RrlPassword extends RrlElement {
     }
 };
 
-customElements.define("rrl-password", RrlPassword);
+customElements.define("itsas-password", ITSASPassword);

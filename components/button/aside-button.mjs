@@ -1,8 +1,8 @@
-import { RrlElement, html, css } from '../../js/rrl-element.mjs';
+import { ITSASElement, html, css } from '../../js/itsas-element.mjs';
 
 import '../icon/icon.mjs'
 
-customElements.define('aside-button', class AsideButton extends RrlElement {
+customElements.define('aside-button', class AsideButton extends ITSASElement {
     static get properties() {
         return {
             _useInfo: { type: Boolean, default: true },
@@ -20,15 +20,15 @@ customElements.define('aside-button', class AsideButton extends RrlElement {
                 margin: 1px;
                 user-select: none;
             }
-            .rrl-btn {
+            .itsas-btn {
                 display: flex;
                 align-items: center;
                 cursor: pointer;
             }
-            .rrl-btn:hover {
+            .itsas-btn:hover {
                fill: red;
             }
-            .rrl-btn:active {
+            .itsas-btn:active {
                 transition: .1s;
                 filter: brightness(85%);
             }
@@ -36,11 +36,11 @@ customElements.define('aside-button', class AsideButton extends RrlElement {
     }
 
     get #icon() {
-        return html`<rrl-icon name="${this.name}" size="${this.size}"></rrl-icon>`;
+        return html`<itsas-icon name="${this.name}" size="${this.size}"></itsas-icon>`;
     }
     render() {
         return html`
-            <div id="rrl-btn" class="rrl-btn"  tabindex="0">
+            <div id="itsas-btn" class="itsas-btn"  tabindex="0">
                 ${this.#icon}
             </div>
         `;

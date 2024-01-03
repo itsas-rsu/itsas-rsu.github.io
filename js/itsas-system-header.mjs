@@ -3,6 +3,9 @@ import { ITSASElement, html, css } from './itsas-element.mjs'
 import '../components/button/button.mjs';
 import '../components/icon/icon.mjs';
 
+import '../../components/forms/sign-in-form.mjs';
+import '../../components/forms/sign-up-form.mjs';
+
 import {createPouch } from './pouchdb.mjs';
 
 class ITSASSystemHeader extends ITSASElement {
@@ -168,6 +171,8 @@ class ITSASSystemHeader extends ITSASElement {
     render() {
         return html`
             <header>
+                <sign-in-form></sign-in-form>
+                <sign-up-form></sign-up-form>
                 <div class="itsas-name">
                     <a href="#">
                         <h3>ИСАВР</h3>
@@ -176,6 +181,7 @@ class ITSASSystemHeader extends ITSASElement {
                 <div class="user-actions">
                     <itsas-icon name="camera" class="header-button settings-icon"></itsas-icon>
                     <itsas-icon name="bell" class="header-button notifications-icon"></itsas-icon>
+                    <aside-button name="user" title="Profile" @click=${this.SignIn}></aside-button>
                 </div>
                 <div class="user-menu">
                     <img src="./images/avatar.png" alt="Аватар пользователя" class="user-avatar">
@@ -198,6 +204,16 @@ class ITSASSystemHeader extends ITSASElement {
     firstUpdated() {
         super.firstUpdated();
         this.createDB();
+    }
+
+    SignIn() {
+        this.renderRoot.querySelector("sign-in-form").open().then(() => this.showUserAccount()).catch(() => '');
+    }
+
+    showUserAccount() {
+        // this.offsetParent.successUserIn = true;
+        // this.successUserIn = true;
+        window.location.hash = '#my-profile';
     }
 }
 

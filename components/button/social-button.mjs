@@ -1,8 +1,8 @@
-import { RrlElement, html, css } from '../../js/rrl-element.mjs';
+import { ITSASElement, html, css } from '../../js/itsas-element.mjs';
 
 import '../icon/icon.mjs'
 
-customElements.define('social-button', class SocialButton extends RrlElement {
+customElements.define('social-button', class SocialButton extends ITSASElement {
     static get properties() {
         return {
             name: { type: String, default: '', isIcon: true },
@@ -42,7 +42,7 @@ customElements.define('social-button', class SocialButton extends RrlElement {
     render() {
         return html`
             <a href="${this.href}" style="background-color: ${this.backgroundColor};" target="_blank" title="${this.title}">
-                <rrl-icon name="${this.name}" fill="${this.color}" size="${this.size}" scale="${this.scale}"></rrl-icon>
+                <itsas-icon name="${this.name}" fill="${this.color}" size="${this.size}" scale="${this.scale}"></itsas-icon>
             </a>
         `;
     }

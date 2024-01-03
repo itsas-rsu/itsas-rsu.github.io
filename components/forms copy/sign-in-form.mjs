@@ -1,5 +1,5 @@
 
-import { RrlElement, html, css } from '../../js/rrl-element.mjs';
+import { ITSASElement, html, css } from '../../js/itsas-element.mjs';
 
 import { formStyles } from './form-css.mjs'
 
@@ -12,7 +12,7 @@ import '../input/email.mjs';
 import '../input/password.mjs';
 import '../button/close-button.mjs';
 
-class SignInForm extends RrlElement {
+class SignInForm extends ITSASElement {
     static get properties() {
         return {
             version: { type: String, default: '1.0.0', save: true, category: 'settings' },
@@ -69,8 +69,8 @@ class SignInForm extends RrlElement {
 
                 <div class="form-body">
                     <div id="db-tab-section" class="form-tab-section selected">
-                        <rrl-input id="login" type="text" name="user" placeholder="Логин" label="Пользователь" icon="{}" class="notoggled" fill="gray" size="28" scale="0.9" rotate="0" speed="0" blink="0" blval="1;0;0;1" path=""></rrl-input>
-                        <rrl-password id="password" type="password" label="Пароль" visibleIcon="eye-slash-regular" invisibleIcon="eye-regular" class="notoggled" icon="{}" name="lock" fill="gray" size="28" scale="0.9" rotate="0" speed="0" blink="0" blval="1;0;0;1" path=""></rrl-password>
+                        <itsas-input id="login" type="text" name="user" placeholder="Логин" label="Пользователь" icon="{}" class="notoggled" fill="gray" size="28" scale="0.9" rotate="0" speed="0" blink="0" blval="1;0;0;1" path=""></itsas-input>
+                        <itsas-password id="password" type="password" label="Пароль" visibleIcon="eye-slash-regular" invisibleIcon="eye-regular" class="notoggled" icon="{}" name="lock" fill="gray" size="28" scale="0.9" rotate="0" speed="0" blink="0" blval="1;0;0;1" path=""></itsas-password>
 
                         <div class="login-options">
                             <div class="checkbox-remember">

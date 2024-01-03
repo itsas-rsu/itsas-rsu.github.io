@@ -1,7 +1,10 @@
 import { ITSASElement, html, css } from './itsas-element.mjs'
 
 import '../components/button/button.mjs';
+import '../components/button/aside-button.mjs';
 import '../components/icon/icon.mjs';
+import '../../components/forms/sign-in-form.mjs';
+import '../../components/forms/sign-up-form.mjs';
 
 class ITSASSystemSidebar extends ITSASElement {
     static get properties() {
@@ -23,7 +26,7 @@ class ITSASSystemSidebar extends ITSASElement {
                 -moz-user-select: none;
                 -ms-user-select: none;
                 user-select: none;
-            }          
+            }
 
             .sidebar {
                 display: flex;
@@ -37,7 +40,7 @@ class ITSASSystemSidebar extends ITSASElement {
                 gap: 10px; /* Если необходимо, добавьте промежуток между разделами */
                 background: var(--turing-gray-80, #31323A);
             }
-              
+
             .sidebar-section {
                 /* Стили для секции с логотипом */
                 display: flex;
@@ -46,7 +49,7 @@ class ITSASSystemSidebar extends ITSASElement {
                 width: 80px;
                 height: 80px;
             }
-              
+
             .sidebar-button {
                 /* Стили для индивидуальных кнопок */
                 display: flex;
@@ -65,14 +68,14 @@ class ITSASSystemSidebar extends ITSASElement {
                 background: var(--turing-gray-70, #484852);
                 color: white;
               }
-              
+
             .itsas-icon {
                 display: block;
                 width: 100%;
                 text-align: center;
                 font-size: 24px; /* Или другой размер, который вы предпочитаете */
-            }  
-              
+            }
+
             .menu-section {
                 flex-direction: column;
                 height: auto;
@@ -88,30 +91,45 @@ class ITSASSystemSidebar extends ITSASElement {
 
     render() {
         return html`
+            <sign-in-form></sign-in-form>
+            <sign-up-form></sign-up-form>
             <aside class="sidebar">
                 <!-- Секция логотипа, всегда наверху -->
                 <div class="sidebar-section">
                     <img src="./images/logo.png" alt="ITSAS Logo" height="60" />
                 </div>
-        
+
                 <!-- Секция основных кнопок -->
                 <div class="sidebar-section menu-section">
                     <button class="sidebar-button">
                         <itsas-icon name="home"></itsas-icon>
-                    </button>  
+                    </button>
                     <button class="sidebar-button">
                         <itsas-icon name="credit-card"></itsas-icon>
-                    </button>  
+                    </button>
+                    <aside-button name="user" title="Profile" @click=${this.SignIn}></aside-button>
                 </div>
-                
+
                 <!-- Секция выхода, всегда внизу -->
                 <div class="sidebar-section">
                     <button class="sidebar-button">
                         <itsas-icon name="exit-to-app"></itsas-icon>
-                    </button>  
+                    </button>
                 </div>
-            </aside>        
+            </aside>
         `;
+    }
+
+    SignIn() {
+        if (!this.isHorizontal)
+            this.showMenu();
+        this.renderRoot.querySelector("sign-in-form").open().then(() => this.showUserAccount()).catch(() => '');
+    }
+
+    showUserAccount() {
+        // this.offsetParent.successUserIn = true;
+        // this.successUserIn = true;
+        window.location.hash = '#my-profile';
     }
 
     firstUpdated() {

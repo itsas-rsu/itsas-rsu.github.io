@@ -1,9 +1,9 @@
 
-import { RrlElement, html, css } from '../../js/rrl-element.mjs';
+import { ITSASElement, html, css } from '../../js/itsas-element.mjs';
 
 import { formStyles } from './game-fine-dialog-css.mjs'
 
-class GameFindDialog extends RrlElement {
+class GameFindDialog extends ITSASElement {
     static get properties() {
         return {
             version: { type: String, default: '1.0.0', save: true, category: 'settings' },
