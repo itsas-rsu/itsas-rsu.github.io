@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        a::before {
+            display: inline-block;
+            content: '';
+            background-color: tomato;
+            position: absolute;
+            z-index: -1;
+            left: 0; right: 0; /* Вся ширин */
+            top: 0; bottom: 0; /* Вся высота */
+        }
+        a:hover::before {
+            filter: brightness(200%);
+        }
+    </style>
+</head>
+<body>
+    <a href="#">Привет</a>
+</body>
+</html>
