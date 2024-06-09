@@ -62,6 +62,28 @@ class MyProfileSection1 extends BaseElement {
                         margin: 0;
                     }
 
+                    #project-header p {
+                        width: 100%;
+                        overflow: hidden;
+                        white-space: nowrap;
+                        text-overflow: ellipsis;
+                        font-size: 1rem;
+                        margin: 0;
+                        font-family: 'Poppins', sans-serif;
+                        font-weight: 600;
+                    }
+
+                    #property-header p {
+                        width: 100%;
+                        overflow: hidden;
+                        white-space: nowrap;
+                        text-overflow: ellipsis;
+                        font-size: 1rem;
+                        margin: 0;
+                        font-family: 'Poppins', sans-serif;
+                        font-weight: 600;
+                    }
+
                     #property-header{
                         grid-area: header2;
                     }
@@ -237,7 +259,7 @@ class MyProfileSection1 extends BaseElement {
             return html`
                 <confirm-dialog></confirm-dialog>
                 <header id="project-header"><p>Profile</p></header>
-                <header id="property-header">Personal data</header>
+                <header id="property-header"><p>Personal data</p></header>
                 <div class="left-layout">
                     <div class="avatar">
                         ${this.isFirst ? html`<avatar-input id="avatar" .currentObject=${this} .avatar=${this.avatar || 'images/avatar.svg'} @input=${this.validateAvatar}></avatar-input>` : ''}

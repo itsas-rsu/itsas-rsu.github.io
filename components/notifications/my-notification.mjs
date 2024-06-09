@@ -73,7 +73,7 @@ customElements.define("my-notification", class MyNotification extends BaseElemen
 
     get #icon() {
         return html`
-            <simple-icon class="icon" icon-name="comment-dollar-solid"></simple-icon>
+            <simple-icon class="icon" icon-name="notification"></simple-icon>
         `
     }
 

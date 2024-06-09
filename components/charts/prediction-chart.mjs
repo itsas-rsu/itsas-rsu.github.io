@@ -79,20 +79,20 @@ customElements.define("prediction-chart", class PredictionChart extends BaseElem
                     y: {
                         beginAtZero: true,
                         grid: {
-                            color: 'rgba(255, 255, 255, 0.1)', // Светлая сетка для оси Y
+                            color: 'rgba(255, 255, 255, 0.1)',
                             borderDash: [5, 5],
                         },
                         ticks: {
-                            color: 'rgba(255, 255, 255, 0.7)', // Цвет подписей к делениям оси Y
+                            color: 'rgba(255, 255, 255, 0.7)',
                         }
                     },
                     x: {
                         grid: {
-                            color: 'rgba(255, 255, 255, 0.1)', // Светлая сетка для оси X
+                            color: 'rgba(255, 255, 255, 0.1)',
                             borderDash: [5, 5],
                         },
                         ticks: {
-                            color: 'rgba(255, 255, 255, 0.7)', // Цвет подписей к делениям оси X
+                            color: 'rgba(255, 255, 255, 0.7)',
                         }
                     }
                 }

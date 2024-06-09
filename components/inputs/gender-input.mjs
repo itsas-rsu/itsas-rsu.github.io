@@ -48,7 +48,7 @@ customElements.define("gender-input", class GenderInput extends BaseElement {
                     appearance: none;
                     width: 1rem;
                     aspect-ratio: 1;
-                    border: 2px solid white;
+                    border: 2px solid black;
                     border-radius: 50%;
                     cursor: pointer;
                     margin: 0;

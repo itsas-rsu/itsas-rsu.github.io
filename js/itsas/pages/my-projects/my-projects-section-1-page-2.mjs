@@ -180,15 +180,6 @@ class MyProjectsSection1Page2 extends BaseElement {
             }
         }
 
-        // update(changedProps) {
-        //     super.update(changedProps);
-        //     if (!changedProps) return;
-        //     if (changedProps.has('project') && this.project) {
-        //         this.requestUpdate()
-        //     }
-
-        // }
-
 
         render() {
             return html`
@@ -213,28 +204,6 @@ class MyProjectsSection1Page2 extends BaseElement {
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
-                   /*this.chartData = [
-                        { date: '2024-05-12T00:00:00', temperature: 14, humidity: 85 },
-                        { date: '2024-05-12T01:00:00', temperature: 13, humidity: 87 },
-                        { date: '2024-05-12T02:00:00', temperature: 13, humidity: 89 },
-                        { date: '2024-05-12T03:00:00', temperature: 12, humidity: 90 },
-                        { date: '2024-05-12T04:00:00', temperature: 12, humidity: 91 },
-                        { date: '2024-05-12T05:00:00', temperature: 11, humidity: 93 },
-                        { date: '2024-05-12T06:00:00', temperature: 11, humidity: 94 },
-                        { date: '2024-05-12T07:00:00', temperature: 12, humidity: 92 },
-                        { date: '2024-05-12T08:00:00', temperature: 14, humidity: 90 },
-                        { date: '2024-05-12T09:00:00', temperature: 16, humidity: 85 },
-                        { date: '2024-05-12T10:00:00', temperature: 18, humidity: 80 },
-                        { date: '2024-05-12T11:00:00', temperature: 20, humidity: 75 },
-                        { date: '2024-05-12T12:00:00', temperature: 22, humidity: 70 },
-                        { date: '2024-05-12T13:00:00', temperature: 23, humidity: 65 },
-                        { date: '2024-05-12T14:00:00', temperature: 24, humidity: 60 },
-                        { date: '2024-05-12T15:00:00', temperature: 24, humidity: 60 },
-                        { date: '2024-05-12T16:00:00', temperature: 23, humidity: 65 },
-                        { date: '2024-05-12T17:00:00', temperature: 21, humidity: 70 },
-                        { date: '2024-05-12T18:00:00', temperature: 19, humidity: 75 },
-                        { date: '2024-05-12T19:00:00', temperature: 17, humidity: 80 }
-                    ];*/
                 }
                 return response.json();
             })

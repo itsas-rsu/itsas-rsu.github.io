@@ -14,7 +14,6 @@ class MyNotificationsSection1 extends BaseElement {
                 currentProject: {type: String, default: ""},
                 isModified: {type: Boolean, default: ""},
                 isReady: {type: Boolean, default: true},
-                // isValidate: {type: Boolean, default: false, local: true},
                 notificationCurrentOffset: { type: String, default: '', local: true },
             }
         }
@@ -28,11 +27,10 @@ class MyNotificationsSection1 extends BaseElement {
                         width: 100%;
                         padding-left: 20px;
                         grid-template-columns: 1fr;
-                        grid-template-rows: 50px 1fr 50px;
+                        grid-template-rows: 50px 1fr;
                         grid-template-areas:
                             "header"
-                            "sidebar"
-                            "footer";
+                            "sidebar";
                         gap: 0 20px;
                         background: #f7faff;
                     }
@@ -196,24 +194,11 @@ class MyNotificationsSection1 extends BaseElement {
                     }
                     return json;
                 })
-                // .then(() => this.modalDialogShow())
                 .catch(err => {console.error(err)});
-
-        }
-        async showProject(index, projectId) {
-            if (this.isModified) {
-                const modalResult = await this.confirmDialogShow('Проект был изменен. Сохранить сделанные изменения?')
-                if (modalResult === 'Ok')
-                    this.saveProject().then(() => this.currentProject = this.dataSet[index]);
-            }
-            else {
-                this.currentProject = this.dataSet[index]
-            }
         }
 
         render() {
             return html`
-                <confirm-dialog></confirm-dialog>
                 <header id="project-header"><p>My Notifications</p></header>
                 <div class="left-layout">
                     ${this.dataSet.map((notification, index, notifications) => {
@@ -231,147 +216,13 @@ class MyNotificationsSection1 extends BaseElement {
                         `
                         })}
                 </div>
-
-                <footer>
-                    <simple-button label=${this.isModified ? "Сохранить": "Удалить"} @click=${this.isModified ? this.saveProject: this.deleteProject}></simple-button>
-                    <simple-button label=${this.isModified ? "Отменить": "Добавить"} @click=${this.isModified ? this.cancelProject: this.addProject}></simple-button>
-                </footer>
             `;
-        }
-
-        async getNewFileHandle() {
-            const options = {
-              types: [
-                {
-                  description: 'Text Files',
-                  accept: {
-                    'text/plain': ['.txt'],
-                  },
-                },
-                {
-                  description: 'Neural Models',
-                  accept: {
-                    'application/octet-stream': ['.pkl'],
-                  },
-                },
-
-              ],
-            };
-            const handle = await window.showSaveFilePicker(options);
-            return handle;
-        }
-
-        async downloadFile() {
-            const token = await this.getToken();
-            const projectId = this.currentProject._id;
-            // const fileHandle = await window.getNewFileHandle();
-            fetch(`https://cs.rsu.edu.ru:4500/api/download/${projectId}`, {
-                method: 'GET',
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                }
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Ошибка при загрузке файла: ' + response.statusText);
-                }
-                return response.blob();
-            })
-            .then(async blob => {
-                if (window.navigator && window.navigator.msSaveOrOpenBlob) {
-                    window.navigator.msSaveOrOpenBlob(blob, 'model.pkl');
-                } else {
-                    const options = {
-                        suggestedName: 'model',
-                        types: [
-                            {
-                                description: 'Neural Model',
-                                accept: {
-                                  'application/octet-stream': ['.pkl']
-                                }
-                            },
-                            {
-                              description: 'Text Files',
-                              accept: {
-                                'text/plain': ['.txt', '.text'],
-                                'text/html': ['.html', '.htm']
-                              }
-                            },
-                            {
-                              description: 'Images',
-                              accept: {
-                                'image/*': ['.png', '.gif', '.jpeg', '.jpg']
-                              }
-                            }
-                            ,
-                            {
-                              description: 'Images 2',
-                              accept: {
-                                'image/png': ['.png', '.gif', '.jpeg', '.jpg']
-                              }
-                            },
-                        ],
-                        excludeAcceptAllOption: true
-                    };
-                    // ,
-                    //         {
-                    //             description: 'Text Files',
-                    //             accept: {
-                    //                 'text/plain': ['.txt'],
-                    //             },
-                    //         },
-                    try {
-                        // Для других браузеров
-                        const fileHandle = await window.showSaveFilePicker(options);
-                        const writable = await fileHandle.createWritable();
-                        await writable.write(blob);
-                        await writable.close();
-                    } catch (err){
-                        console.error(err);
-                        // Для других браузеров
-                        const downloadUrl = window.URL.createObjectURL(blob);
-                        const a = document.createElement('a');
-                        a.href = downloadUrl;
-                        a.download = 'model.pkl';
-                        document.body.appendChild(a);
-                        a.click();
-                        setTimeout(() => {
-                            window.URL.revokeObjectURL(downloadUrl);
-                            document.body.removeChild(a);
-                        }, 0);
-                    }
-                }
-            })
-            .catch(error => {
-                console.error('Ошибка:', error);
-            });
-        }
-
-
-        validateInput(e) {
-            if (e.target.value !== "") {
-                this.oldValues ??= new Map();
-                const currentProject = e.target.currentObject ?? this.currentProject
-                if (!this.oldValues.has(e.target))
-                    this.oldValues.set(e.target, currentProject[e.target.id])
-                else {
-                    if (this.oldValues.get(e.target) === e.target.value) {
-                        this.oldValues.delete(e.target)
-                    }
-                }
-                currentProject[e.target.id] = e.target.value
-                this.isModified = this.oldValues.size !== 0;
-            }
         }
 
         async getToken() {
             return localStorage.getItem('rememberMe') ?
                 localStorage.getItem('accessUserToken') :
                 sessionStorage.getItem('accessUserToken')
-        }
-
-        async confirmDialogShow(message) {
-            return await this.renderRoot.querySelector('confirm-dialog').show(message);
         }
 
         async getNotificationList() {
@@ -404,7 +255,6 @@ class MyNotificationsSection1 extends BaseElement {
                 return json.rows;
             })
             .then(notifications => this.saveDataSet(notifications))
-            // .then(() => this.modalDialogShow())
             .catch(err => {console.error(err.message)});
         }
 
@@ -413,7 +263,6 @@ class MyNotificationsSection1 extends BaseElement {
                 return;
             this.dataSet = notifications.map( notification => notification.doc)
                 .sort( (a, b) => b.timestamp - a.timestamp )
-            this.currentProject = this.dataSet[0];
         }
 
         refreshToken() {
@@ -434,6 +283,7 @@ class MyNotificationsSection1 extends BaseElement {
             .then(token => this.saveToken(token))
             .catch(err => {console.error(err.message)});
         }
+
         async saveToken(token) {
             if (localStorage.getItem('rememberMe')) {
                 localStorage.setItem('accessUserToken', token)
@@ -442,181 +292,6 @@ class MyNotificationsSection1 extends BaseElement {
                 sessionStorage.setItem('accessUserToken', token)
             }
             return token;
-        }
-
-        async addProject() {
-            const token = await this.getToken();
-            const project = {name: "Новый проект"}
-            return fetch(`https://cs.rsu.edu.ru:4500/api/project`, {
-                method: "POST",
-                headers: {
-                  'Authorization': `Bearer ${token}`,
-                  'Content-Type': 'application/json;charset=utf-8'
-                },
-                body: JSON.stringify(project)
-            })
-            .then(response => response.json())
-            .then(json => {
-                if (json.error) {
-                    throw Error(json.error)
-                }
-                return json.id;
-            })
-            .then(projectId => this.getProject(projectId))
-            .then(project => this.addToDataset(project))
-            // .then(() => this.modalDialogShow())
-            .catch(err => {console.error(err.message)});
-        }
-
-        async saveProject() {
-            const token = await this.getToken();
-            const result = await this.uploadFile();
-            if (!result) return;
-            return fetch(`https://cs.rsu.edu.ru:4500/api/project/${this.currentProject._id}`, {
-                method: "PUT",
-                headers: {
-                  'Authorization': `Bearer ${token}`,
-                  'Content-Type': 'application/json;charset=utf-8'
-                },
-                body: JSON.stringify(this.currentProject)
-            })
-            .then(response => response.json())
-            .then(json => {
-                if (json.error) {
-                    throw Error(json.error)
-                }
-                return json;
-            })
-            .then(projectHeader => this.afterSave(projectHeader))
-            // .then(() => this.modalDialogShow())
-            .catch(err => {console.error(err)});
-        }
-
-        async uploadFile() {
-            const token = await this.getToken();
-            const formData = new FormData();
-            const uploadInput = this.renderRoot?.querySelector('upload-input')
-            formData.append("file", uploadInput.file);
-            return fetch(`https://cs.rsu.edu.ru:4500/api/upload/project/${this.currentProject._id}`, {
-                method: "POST",
-                headers: {
-                  'Authorization': `Bearer ${token}`,
-                },
-                body: formData
-            })
-            .then(response => response.json())
-            .then(json => {
-                if (json.error) {
-                    throw Error(json.error)
-                }
-                return json;
-            })
-            // .then(projectHeader => this.updateDataset(projectHeader))
-            // .then(() => this.modalDialogShow())
-            .catch(err => {console.error(err)});
-        }
-
-        async deleteProject() {
-            const modalResult = await this.confirmDialogShow('Вы действительно хотите удалить этот проект?')
-            if (modalResult !== 'Ok')
-                return;
-            const token = await this.getToken();
-            try {
-                await this.deleteProjectFiles(token)
-            } catch(err) {
-                console.error(err.message)
-                return
-            }
-            return fetch(`https://cs.rsu.edu.ru:4500/api/project/${this.currentProject._id}?rev=${this.currentProject._rev}`, {
-                method: "DELETE",
-                headers: {
-                  'Authorization': `Bearer ${token}`
-                }
-            })
-            .then(response => response.json())
-            .then(json => {
-                if (json.error) {
-                    throw Error(json.error)
-                }
-                return json;
-            })
-            .then(project => this.deleteFromDS(project))
-            // .then(() =>c.modalDialogShowShow())
-            .catch(err => {console.error(err.message)});
-        }
-
-        async deleteProjectFiles(token) {
-            return fetch(`https://cs.rsu.edu.ru:4500/api/upload/${this.currentProject._id}`, {
-                method: "DELETE",
-                headers: {
-                  'Authorization': `Bearer ${token}`
-                }
-            })
-            .then(response => response.json())
-            .then(json => {
-                if (json.error) {
-                    throw Error(json.error)
-                }
-                return json;
-            })
-        }
-
-
-        async cancelProject() {
-            const modalResult = await this.confirmDialogShow('Вы действительно хотите отменить все изменения?')
-            if (modalResult !== 'Ok')
-                return
-            this.oldValues.forEach( (value, key) => {
-                const currentProject = key.currentObject ?? this.currentProject
-                currentProject[key.id] = value;
-                key.value = value;
-            });
-            this.oldValues.clear();
-            this.isModified = false;
-        }
-
-        async deleteFromDS(project) {
-            const currentIndex = this.dataSet.indexOf(this.currentProject)
-            this.currentProject = this.dataSet.length === 1 ? {} :
-                currentIndex === 0 ? this.dataSet[currentIndex + 1] : this.dataSet[currentIndex - 1]
-            this.dataSet.splice(currentIndex, 1)
-            return project
-        }
-
-        async addToDataset(project) {
-            this.dataSet.unshift(project);
-            this.currentProject = this.dataSet[0]
-            return project
-        }
-
-        async afterSave(projectHeader) {
-            this.currentProject._rev = projectHeader.rev;
-            const uploadInput = this.renderRoot?.querySelector('upload-input')
-            uploadInput.file = null;
-            this.oldValues?.clear();
-            this.isModified = false;
-        }
-
-        async getProject(projectId) {
-            const token = await this.getToken();
-            return fetch(`https://cs.rsu.edu.ru:4500/api/project/${projectId}`, {
-                headers: {
-                  'Authorization': `Bearer ${token}`
-                }
-            })
-            .then(response => response.json())
-            .then(json => {
-                if (json.error) {
-                    throw Error(json.error)
-                }
-                return json;
-            })
-            .then(project => {
-                console.log(project)
-                return project
-            })
-            // .then(() =>c.modalDialogShowShow())
-            .catch(err => {console.error(err.message)});
         }
 
         async firstUpdated() {

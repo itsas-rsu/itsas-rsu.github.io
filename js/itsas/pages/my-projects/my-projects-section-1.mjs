@@ -290,8 +290,10 @@ class MyProjectsSection1 extends BaseElement {
                     </div>
                 </div>
                 <footer>
-                    <simple-button label=${this.isModified ? "Сохранить": "Удалить"} @click=${this.isModified ? this.saveProject: this.deleteProject}></simple-button>
-                    <simple-button label=${this.isModified ? "Отменить": "Добавить"} @click=${this.isModified ? this.cancelProject: this.addProject}></simple-button>
+                    <simple-button label=${this.isModified ? "Сохранить": "Удалить"}
+                        @click=${this.isModified ? this.saveProject: this.deleteProject}></simple-button>
+                    <simple-button label=${this.isModified ? "Отменить": "Добавить"}
+                        @click=${this.isModified ? this.cancelProject: this.addProject}></simple-button>
                 </footer>
             `;
         }

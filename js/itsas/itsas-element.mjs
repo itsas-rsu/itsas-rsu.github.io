@@ -25,9 +25,6 @@ class ItsasElement extends BaseElement {
                     grid-template-areas:
                       "header header"
                       "aside content";
-
-                    // flex-direction: column;
-                    // justify-content: center;
                     position: relative;
                 }
                 :host([auth]) {
@@ -61,14 +58,6 @@ class ItsasElement extends BaseElement {
         });
 
         addEventListener("hashchange", () => {this.requestUpdate()});
-        // this.lazyLoad = {};
-        // this.lazyLoad[Symbol.iterator] = function* () {
-        //     var index = 0;
-        //     while (true) {
-        //         console.log(index);
-        //         yield index++;
-        //     }
-        // }
     }
 
     get pageName() {
@@ -76,7 +65,6 @@ class ItsasElement extends BaseElement {
     }
 
     * lazyLoad() {
-        // const lazyPages=['about-me', 'my-pride', 'my-stack', 'catch-me'];
         const lazyPages=[];
         for (const pageName of lazyPages) {
             import(`./pages/${pageName}/${pageName}.mjs`);
@@ -98,7 +86,6 @@ class ItsasElement extends BaseElement {
     }
 
     render() {
-        // const pagesPath = isAuth ? './pages/profile' : './pages'
         const pagesRootPath = './pages'
         if (!window.customElements.get(this.pageName)) {
             import(`./pages/${this.pageName}/${this.pageName}.mjs`);
