@@ -79,20 +79,20 @@ customElements.define("prediction-chart", class PredictionChart extends BaseElem
                     y: {
                         beginAtZero: true,
                         grid: {
-                            color: 'rgba(255, 255, 255, 0.1)',
+                            color: 'rgba(0, 0, 0, 0.6)', // Changed to black
                             borderDash: [5, 5],
                         },
                         ticks: {
-                            color: 'rgba(255, 255, 255, 0.7)',
+                            color: 'rgba(0, 0, 0, 1)',
                         }
                     },
                     x: {
                         grid: {
-                            color: 'rgba(255, 255, 255, 0.1)',
+                            color: 'rgba(0, 0, 0, 0.6)', // Changed to black
                             borderDash: [5, 5],
                         },
                         ticks: {
-                            color: 'rgba(255, 255, 255, 0.7)',
+                            color: 'rgba(0, 0, 0, 1)',
                         }
                     }
                 }

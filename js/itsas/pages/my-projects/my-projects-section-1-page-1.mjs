@@ -638,6 +638,7 @@ class MyProjectsSection1Page1 extends BaseElement {
             this.currentProject.isLearning = true;
             this.isLearning = true;
         }
+        
         async saveProject() {
             const token = await this.getToken();
             let result = await this.uploadFile();

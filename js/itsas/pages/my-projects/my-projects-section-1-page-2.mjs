@@ -195,7 +195,7 @@ class MyProjectsSection1Page2 extends BaseElement {
             const parts = input.split(":project:");
             const projectId = parts[1];
 
-            fetch(`https://cs.rsu.edu.ru:4500/api/neural-data/${projectId}`, {
+            /*fetch(`https://cs.rsu.edu.ru:4500/api/neural-data/${projectId}`, {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${token}`
@@ -206,13 +206,21 @@ class MyProjectsSection1Page2 extends BaseElement {
                     throw new Error('Network response was not ok');
                 }
                 return response.json();
-            })
-            .then(data => {
-                this.chartData = data;
-            })
-            .catch(error => {
-                console.error('There has been a problem with your fetch operation:', error);
-            });
+            })*/
+            
+            this.chartData = [
+                {"date": 1530043200000.0, "Электричество": 0.26209792877349325}, 
+                {"date": 1530046800000.0, "Электричество": 0.2303106865099931}, 
+                {"date": 1530050400000.0, "Электричество": 0.2602922068713455}, 
+                {"date": 1530054000000.0, "Электричество": 0.24901100219523915}, 
+                {"date": 1530057600000.0, "Электричество": 0.29608655585408996},
+                {"date": 1530061200000.0, "Электричество": 0.2740045229812301}, 
+                {"date": 1530064800000.0, "Электричество": 0.2429935698271904}, 
+                {"date": 1530068400000.0, "Электричество": 0.2310223416687192}, 
+                {"date": 1530072000000.0, "Электричество": 0.2200123456789012}, 
+                {"date": 1530075600000.0, "Электричество": 0.2189997896543211}
+            ];
+    
         }
 
         async getNewFileHandle() {
