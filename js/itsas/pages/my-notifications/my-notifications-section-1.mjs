@@ -179,7 +179,7 @@ class MyNotificationsSection1 extends BaseElement {
                 const obj = {
                     offset: this.notificationCurrentOffset
                 }
-                return fetch(`https://cs.rsu.edu.ru:4500/api/notification-offset`, {
+                return fetch(`https://localhost:4500/api/notification-offset`, {
                     method: "PUT",
                     headers: {
                       'Authorization': `Bearer ${token}`,
@@ -227,7 +227,7 @@ class MyNotificationsSection1 extends BaseElement {
 
         async getNotificationList() {
             const token = await this.getToken();
-            return fetch('https://cs.rsu.edu.ru:4500/api/notifications', {
+            return fetch('https://localhost:4500/api/notifications', {
                 headers: {
                   'Authorization': `Bearer ${token}`
                 }
@@ -236,7 +236,7 @@ class MyNotificationsSection1 extends BaseElement {
             .then(response => {
                 if (response.status === 419){
                     return this.refreshToken().then( token =>
-                        fetch('https://cs.rsu.edu.ru:4500/api/notifications', {
+                        fetch('https://localhost:4500/api/notifications', {
                             headers: {
                             'Authorization': `Bearer ${token}`
                             }
@@ -266,7 +266,7 @@ class MyNotificationsSection1 extends BaseElement {
         }
 
         refreshToken() {
-            return fetch('https://cs.rsu.edu.ru:4500/api/refresh-token', {
+            return fetch('https://localhost:4500/api/refresh-token', {
                 method: 'GET',
                 headers: {
                   'Content-Type': 'application/json;charset=utf-8'

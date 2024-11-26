@@ -358,7 +358,7 @@ class MyProfileSection1 extends BaseElement {
             const token = await this.getToken();
             const projectId = this.currentProject._id;
             // const fileHandle = await window.getNewFileHandle();
-            fetch(`https://cs.rsu.edu.ru:4500/api/download/${projectId}`, {
+            fetch(`https://localhost:4500/api/download/${projectId}`, {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${token}`
@@ -455,7 +455,7 @@ class MyProfileSection1 extends BaseElement {
 
         async getUserProfile() {
             const token = await this.getToken();
-            return fetch('https://cs.rsu.edu.ru:4500/api/user-profile', {
+            return fetch('https://localhost:4500/api/user-profile', {
                 headers: {
                   'Authorization': `Bearer ${token}`
                 }
@@ -464,7 +464,7 @@ class MyProfileSection1 extends BaseElement {
             .then(response => {
                 if (response.status === 419){
                     return this.refreshToken().then( token =>
-                        fetch('https://cs.rsu.edu.ru:4500/api/user-profile', {
+                        fetch('https://localhost:4500/api/user-profile', {
                             headers: {
                             'Authorization': `Bearer ${token}`
                             }
@@ -492,7 +492,7 @@ class MyProfileSection1 extends BaseElement {
             return this.dataSet;
         }
         refreshToken() {
-            return fetch('https://cs.rsu.edu.ru:4500/api/refresh-token', {
+            return fetch('https://localhost:4500/api/refresh-token', {
                 method: 'GET',
                 headers: {
                   'Content-Type': 'application/json;charset=utf-8'
@@ -525,7 +525,7 @@ class MyProfileSection1 extends BaseElement {
                 if (!result) return;
             }
 
-            return fetch(`https://cs.rsu.edu.ru:4500/api/user-profile`, {
+            return fetch(`https://localhost:4500/api/user-profile`, {
                 method: "PUT",
                 headers: {
                   'Authorization': `Bearer ${token}`,
@@ -549,7 +549,7 @@ class MyProfileSection1 extends BaseElement {
             const token = await this.getToken();
             const formData = new FormData();
             formData.append("file", this.avatarFile);
-            return fetch(`https://cs.rsu.edu.ru:4500/api/upload/avatar`, {
+            return fetch(`https://localhost:4500/api/upload/avatar`, {
                 method: "POST",
                 headers: {
                   'Authorization': `Bearer ${token}`,
@@ -600,7 +600,7 @@ class MyProfileSection1 extends BaseElement {
 
         async getProjectCount() {
             const token = await this.getToken();
-            return fetch('https://cs.rsu.edu.ru:4500/api/projects/count', {
+            return fetch('https://localhost:4500/api/projects/count', {
                 headers: {
                   'Authorization': `Bearer ${token}`
                 }
@@ -625,7 +625,7 @@ class MyProfileSection1 extends BaseElement {
 
         async downloadAvatar() {
             const token = await this.getToken();
-            return fetch(`https://cs.rsu.edu.ru:4500/api/upload/avatar`, {
+            return fetch(`https://localhost:4500/api/upload/avatar`, {
                 method: "GET",
                 headers: {
                   'Authorization': `Bearer ${token}`,

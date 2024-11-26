@@ -96,7 +96,7 @@ class SignUpForm extends BaseElement {
     sendSimpleUser() {
         const user = { username: this.#login, password: this.#password, type: 'simple', email: this.#email }
         console.log(JSON.stringify(user))
-        let response = fetch('https://cs.rsu.edu.ru:4500/api/sign-up', {
+        let response = fetch('https://localhost:4500/api/sign-up', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json;charset=utf-8'
@@ -119,7 +119,7 @@ class SignUpForm extends BaseElement {
         console.log(res)
         const token = { token: res.credential, type: 'google'}
         console.log(JSON.stringify(token))
-        let response = fetch('https://cs.rsu.edu.ru:4500/api/sign-up', {
+        let response = fetch('https://localhost:4500/api/sign-up', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json;charset=utf-8'
@@ -140,7 +140,7 @@ class SignUpForm extends BaseElement {
 
 
     getUserInfo(token) {
-        return fetch('https://cs.rsu.edu.ru:4500/api/user?info=fle', {
+        return fetch('https://localhost:4500/api/user?info=fle', {
             headers: {
               'Authorization': `Bearer ${token}`
             }
@@ -158,7 +158,7 @@ class SignUpForm extends BaseElement {
     }
 
     getSimpleUserInfo(token) {
-        return fetch('https://cs.rsu.edu.ru:4500/api/user?info=fle', {
+        return fetch('https://localhost:4500/api/user?info=fle', {
             headers: {
               'Authorization': `Bearer ${token}`
             }

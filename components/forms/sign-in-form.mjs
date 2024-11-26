@@ -101,7 +101,7 @@ customElements.define("sign-in-form", class SignInForm extends BaseElement {
         console.log(res)
         const token = { token: res.credential, type: 'google'}
         console.log(JSON.stringify(token))
-        let response = fetch('https://cs.rsu.edu.ru:4500/api/sign-in', {
+        let response = fetch('https://localhost:4500/api/sign-in', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json;charset=utf-8'
@@ -208,7 +208,7 @@ customElements.define("sign-in-form", class SignInForm extends BaseElement {
     sendSimpleUser() {
         const user = { username: this.#login, password: this.#password, type: 'simple'}
         console.log(JSON.stringify(user))
-        let response = fetch('https://cs.rsu.edu.ru:4500/api/sign-in', {
+        let response = fetch('https://localhost:4500/api/sign-in', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json;charset=utf-8'
@@ -230,7 +230,7 @@ customElements.define("sign-in-form", class SignInForm extends BaseElement {
     }
 
     // refreshToken() {
-    //     return fetch('https://cs.rsu.edu.ru:4500/api/refresh-token', {
+    //     return fetch('https://localhost:4500/api/refresh-token', {
     //         method: 'GET',
     //         headers: {
     //           'Content-Type': 'application/json;charset=utf-8'
@@ -257,7 +257,7 @@ customElements.define("sign-in-form", class SignInForm extends BaseElement {
     }
 
     getSimpleUserInfo(token) {
-        return fetch('https://cs.rsu.edu.ru:4500/api/user?info=fle', {
+        return fetch('https://localhost:4500/api/user?info=fle', {
             headers: {
               'Authorization': `Bearer ${token}`
             }

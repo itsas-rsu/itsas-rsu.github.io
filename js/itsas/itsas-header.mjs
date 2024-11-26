@@ -244,7 +244,7 @@ class ItsasHeader extends BaseElement {
 
     createEventSource() {
         console.log(`Bearer ${this.getToken()}`)
-        this.eventSource = new EventSource(`https://cs.rsu.edu.ru:4500/api/sse?token=${this.getToken()}`)
+        this.eventSource = new EventSource(`https://localhost:4500/api/sse?token=${this.getToken()}`)
         this.eventSource.onmessage = (event) => {
             console.log(event);
         };
@@ -263,7 +263,7 @@ class ItsasHeader extends BaseElement {
 
     async getNotificationOffset(projectId) {
         const token = await this.getToken();
-        return fetch(`https://cs.rsu.edu.ru:4500/api/notification-offset`, {
+        return fetch(`https://localhost:4500/api/notification-offset`, {
             headers: {
               'Authorization': `Bearer ${token}`
             }
